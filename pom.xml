@@ -1,16 +1,65 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-   http://maven.apache.org/xsd/maven-4.0.0.xsd">
-      <modelVersion>4.0.0</modelVersion>
-      <groupId>com.companyname.projectgroup</groupId>
-      <artifactId>project</artifactId>
-      <version>1.0</version>
-      <dependencies>
-         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-         </dependency>
-      </dependencies>  
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.lzyy</groupId>
+  <artifactId>mq</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>mq Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  
+  <properties>
+        <jdk.version>1.8</jdk.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+  
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+     <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+  </dependencies>
+  <build>
+   <finalName>mq</finalName>
+        <plugins>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!--https://www.eclipse.org/jetty/documentation/9.3.0.v20150612/jetty-maven-plugin.html -->
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.2.17.v20160517</version>
+                <configuration>
+                    <httpConnector>
+                        <port>9097</port>
+                    </httpConnector>
+                    <webApp>
+                        <contextPath>/mq</contextPath>
+                    </webApp>
+                    <stopPort>9966</stopPort>
+                    <stopKey>mq</stopKey>
+                    <!-- <stopKey>gzapi</stopKey> <scanIntervalSeconds>5</scanIntervalSeconds> 
+                        <reload>automatic</reload> -->
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
 </project>
